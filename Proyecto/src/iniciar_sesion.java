@@ -267,17 +267,35 @@ public class iniciar_sesion extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String nombre = txtNombre.getText();
-        String apellido = txtApe.getText();
-        String username = txtUser.getText();
-        String contrasena = txtClave.getText();
-        
-        s.agregarUsuario(nombre, username, apellido, contrasena);
-        
-        txtNombre.setText("");
-        txtApe.setText("");
-        txtUser.setText("");
-        txtClave.setText("");
+      try { 
+         conexion con = new conexion();
+         cn = con.getconectar();
+         String sql = "Insert into users (id,Username,Password) values(?,?,?)";
+         PreparedStatement pst = cn.prepareCall(sql);
+         pst.setInt(1,0);
+         pst.setString(2, txtUser.getText());
+         pst.setString(3, txtClave.getText());
+         
+         pst.executeUpdate();
+         JOptionPane.showMessageDialog(null,"Registro Exitoso");
+         pst.close();
+         cn.close();
+         
+         
+         
+                 
+         
+           
+       }
+       
+       catch(Exception ex)
+       {
+           JOptionPane.showMessageDialog(null,ex);
+           
+           
+           
+           
+       }
         
         
                
