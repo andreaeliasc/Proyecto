@@ -5,48 +5,31 @@
  */
 
 /**
- *
+ * Se renovo codigo debido a fallos en el anterior
  * @author Andrea
  */
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 
 public class conexion {
- private Connection conn;
- private Statement st;
+  private Statement st;
  private ResultSet rs;
- 
- public Connection getConnection(){
-     try{
-         String url = "jbdc:mysql://localhost/java";
-         String user = "root";
-         String pass = "";
-         
-         Class.forName("com.mysql.jbdc.Driver");
-         conn = DriverManager.getConnection(url, user, pass);
-     }
+     Connection conectar = null;
      
-     catch(SQLException ex){
-         System.out.println("Error" + ex.getMessage());
-     }
-     
-     catch(ClassNotFoundException ex){
-         System.out.println("Error" + ex.getMessage());
-     }
-     
-     finally{
-         return conn;
+     public Connection getconectar(){
+         try{
+             Class.forName("com.mysql.jdbc.Driver");
+             conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/java","root","");
+         }catch (ClassNotFoundException | SQLException e){
+             System.out.println("Error al conectar: "+e.getMessage());
+         }
+         return conectar;
          
      }
- 
-         
-                 
-     }
- public ResultSet searchQuery(String sql){
+public ResultSet searchQuery(String sql){
    try {
-       getConnection();
-       st = conn.createStatement();
+       getconectar();
+       st = conectar.createStatement();
        rs = st.executeQuery(sql);
        
    }  
@@ -55,9 +38,12 @@ public class conexion {
    }
    return rs;
    }
+
      
- }
- 
+
+
+
+}
  
   
   
