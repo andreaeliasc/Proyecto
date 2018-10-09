@@ -232,23 +232,37 @@ public class iniciar_sesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String username = txtUsuario.getText();
-        String contrasena = txtContra.getText();
-        int verific = s.buscarUsuario(username,contrasena);
-        if (verific==1){
-            Usuario cuenta = null;
-            cuenta = new Usuario();
-            cuenta = s.buscarUsuario2(username, contrasena);
-            bienvenido hola = new bienvenido();
-            hola.setVisible(true);
-            this.setVisible(false);
+        try {
+            conexion db = new conexion();
+            String user,pass;
+            user = txtUsuario.getText();
+            pass = txtContra.getText();
             
+        
+            
+           ResultSet rs = db.searchQuery("SELECT * FROM users WHERE Username='"+user+"'AND Password='"+pass+"'");
+            if(rs.isBeforeFirst()){
+                while(rs.next()){
+                    if(rs.getString(2).equalsIgnoreCase(user)&&rs.getString(3).equalsIgnoreCase(pass)){
+                       bienvenido M = new bienvenido();
+                        M.setVisible(true);
+                        this.dispose();//
+                        
+                        
+                        
+                    }
+               }
+           }
+            
+            else{
+                JOptionPane.showMessageDialog(this, "ERROR");
+            }
             
         }
-        else{
-            lblALERTA.setText("USUARIO O CLAVE INNCORRECTA");
-            
+        catch(Exception ex){
+           System.out.println("Error"+ex.getMessage());
         }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
