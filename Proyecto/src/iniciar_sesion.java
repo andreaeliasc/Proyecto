@@ -8,12 +8,19 @@
  *
  * @author Andrea
  */
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 public class iniciar_sesion extends javax.swing.JFrame {
 
     /**
      * Creates new form iniciar_sesion
      * 
      */
+    
+    
+    
     private Registro s;
    
     
