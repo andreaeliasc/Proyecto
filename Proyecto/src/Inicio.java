@@ -7,7 +7,14 @@
 /**
  *
  * @author Andrea
+ * 
  */
+import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+
+
 public class Inicio extends javax.swing.JFrame {
 
     /**
@@ -46,6 +53,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         jButton3.setText("¿A donde voy?");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,6 +96,18 @@ public class Inicio extends javax.swing.JFrame {
         sesion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+         menorTiempo nuevo = new menorTiempo();
+        nuevo.setVisible(true); 
+        this.dispose();
+      
+        
+       
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 /*
      *@param args the command line arguments
      */
